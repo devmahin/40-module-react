@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Countries from "../countries/countries";
-
+import "./country.css"
 const Country = () => {
     let [api,setApi] = useState([])
 
@@ -14,11 +14,34 @@ const Country = () => {
         dataAsync()
     }, [])
 
+
+    let [visitedCountry, setVisitedCountry] = useState([]);
+
+    function visitedCountryHandel(country){
+        console.log(country)
+        console.log("visited country")
+        const setVisit = [...visitedCountry, country];
+        setVisitedCountry(setVisit)
+    }
+
     return (
         <div>
             <h1>API LENGTH :{api.length}</h1>
+
             <div>
-            {api.map(countryall => <Countries allData={countryall} key={countryall.cca3}></Countries>)}
+                <h1>visited country : {visitedCountry.length}</h1>
+                <ul>
+                    {visitedCountry.map(val => <li key={visitedCountry.cca3}>{val.name.common}</li>)}
+                </ul>
+            </div>
+            <div className="flexy">
+            {
+            api.map(countryall => <Countries 
+                allData={countryall} 
+                visitedCountryHandel={visitedCountryHandel}
+                key={countryall.cca3}>
+                </Countries>)
+            }
             </div>
         </div>
     );
