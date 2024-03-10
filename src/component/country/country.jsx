@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Countries from "../countries/countries";
 
 const Country = () => {
     let [api,setApi] = useState([])
@@ -16,6 +17,9 @@ const Country = () => {
     return (
         <div>
             <h1>API LENGTH :{api.length}</h1>
+            <div>
+            {api.map(countryall => <Countries allData={countryall} key={countryall.cca3}></Countries>)}
+            </div>
         </div>
     );
 };
